@@ -6,14 +6,16 @@ type LineCoverage struct {
 }
 
 type FileReport struct {
-	Name       string
-	FileDigest string
-	FileSource string
-	Coverage   []LineCoverage
+	Name               string
+	FileDigest         string
+	FileSource         string
+	LineCoverages      []LineCoverage
+	CoveragePercentage float64
 }
 
 type CoverageReport struct {
-	FileReports []FileReport
+	FileReports        []FileReport
+	CoveragePercentage float64
 }
 
 func BuildCoverageReport(jsonObject map[string]interface{}) *CoverageReport {
@@ -31,7 +33,7 @@ func BuildFileReport(jsonObject map[string]interface{}) *FileReport {
 	report.Name = jsonObject["name"].(string)
 	report.FileDigest = jsonObject["source_digest"].(string)
 	report.FileSource = jsonObject["source"].(string)
-	report.Coverage = BuildAllLineCoverages(jsonObject["coverage"].([]interface{}))
+	report.LineCoverages = BuildAllLineCoverages(jsonObject["coverage"].([]interface{}))
 	return report
 }
 

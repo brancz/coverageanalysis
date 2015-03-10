@@ -56,10 +56,10 @@ func TestCoverageReportWithExpectedJson(t *testing.T) {
 	report := BuildCoverageReport(jsonObject)
 	expected_report := &CoverageReport{
 		FileReports: []FileReport{{
-			Name:       "test.rb",
-			FileDigest: "*md5*",
-			FileSource: "puts 'test'",
-			Coverage:   []LineCoverage{{Hits: 0, Ignore: true}, {Hits: 1, Ignore: false}, {Hits: 0, Ignore: true}},
+			Name:          "test.rb",
+			FileDigest:    "*md5*",
+			FileSource:    "puts 'test'",
+			LineCoverages: []LineCoverage{{Hits: 0, Ignore: true}, {Hits: 1, Ignore: false}, {Hits: 0, Ignore: true}},
 		}},
 	}
 	if !reflect.DeepEqual(report, expected_report) {
