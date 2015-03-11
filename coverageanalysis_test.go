@@ -7,14 +7,14 @@ import (
 )
 
 func TestJsonAnalysis(t *testing.T) {
-	report, err := AnalyzeJson(`{
+	report, err := AnalyzeJson([]byte(`{
 		"source_files": [{
 			"name": "test.rb",
 			"source": "puts 'test'",
 			"source_digest": "*md5*",
 			"coverage": [null, 1, null]
 		}]
-	}`)
+	}`))
 	if err != nil {
 		t.Error(err)
 	}
@@ -37,12 +37,12 @@ func TestJsonAnalysis(t *testing.T) {
 }
 
 func TestJsonAnalysisWithMalformedJson(t *testing.T) {
-	_, err := AnalyzeJson("{")
+	_, err := AnalyzeJson([]byte("{"))
 	assert.NotNil(t, err)
 }
 
 func TestJsonAnalysisWithWrongStructureOfJson(t *testing.T) {
-	_, err := AnalyzeJson("{}")
+	_, err := AnalyzeJson([]byte("{}"))
 	if assert.Error(t, err, "bad JSON") {
 		assert.Equal(t, err, errors.New("bad JSON"))
 	}

@@ -5,9 +5,9 @@ import (
 	"errors"
 )
 
-func AnalyzeJson(jsonString string) (report *CoverageReport, err error) {
+func AnalyzeJson(jsonString []byte) (report *CoverageReport, err error) {
 	var jsonObject map[string]interface{}
-	err = json.Unmarshal([]byte(jsonString), &jsonObject)
+	err = json.Unmarshal(jsonString, &jsonObject)
 	if err != nil {
 		return &CoverageReport{}, err
 	}
