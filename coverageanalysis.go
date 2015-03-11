@@ -9,7 +9,7 @@ func AnalyzeJson(jsonString []byte) (report *CoverageReport, err error) {
 	var jsonObject map[string]interface{}
 	err = json.Unmarshal(jsonString, &jsonObject)
 	if err != nil {
-		return &CoverageReport{}, err
+		return &CoverageReport{}, errors.New("malformed JSON")
 	}
 	defer func() { //catch or finally
 		if innerErr := recover(); innerErr != nil { //catch

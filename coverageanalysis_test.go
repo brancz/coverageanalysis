@@ -38,7 +38,9 @@ func TestJsonAnalysis(t *testing.T) {
 
 func TestJsonAnalysisWithMalformedJson(t *testing.T) {
 	_, err := AnalyzeJson([]byte("{"))
-	assert.NotNil(t, err)
+	if assert.Error(t, err, "malformed JSON") {
+		assert.Equal(t, err, errors.New("malformed JSON"))
+	}
 }
 
 func TestJsonAnalysisWithWrongStructureOfJson(t *testing.T) {
