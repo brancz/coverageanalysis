@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/flower-pot/coverageanalysis.svg?branch=master)](https://travis-ci.org/flower-pot/coverageanalysis)
+
 # coverageanalysis
 
 Analyzing coverage reports with go. This project resembles the way
