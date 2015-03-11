@@ -26,21 +26,21 @@ func TestLineCoverageWithDefault(t *testing.T) {
 }
 
 func TestLineCoverageWithArray(t *testing.T) {
-	json_string := `[null, 1]`
+	jsonString := `[null, 1]`
 	var jsonArray []interface{}
-	err := json.Unmarshal([]byte(json_string), &jsonArray)
+	err := json.Unmarshal([]byte(jsonString), &jsonArray)
 	if err != nil {
 		t.Error(err)
 	}
 	report := BuildAllLineCoverages(jsonArray)
-	expected_report := []LineCoverage{{Hits: 0, Ignore: true}, {Hits: 1, Ignore: false}}
-	if !reflect.DeepEqual(report, expected_report) {
+	expectedReport := []LineCoverage{{Hits: 0, Ignore: true}, {Hits: 1, Ignore: false}}
+	if !reflect.DeepEqual(report, expectedReport) {
 		t.Errorf("")
 	}
 }
 
 func TestCoverageReportWithExpectedJson(t *testing.T) {
-	json_string := `{
+	jsonString := `{
 		"source_files": [{
 			"name": "test.rb",
 			"source": "puts 'test'",
@@ -49,12 +49,12 @@ func TestCoverageReportWithExpectedJson(t *testing.T) {
 		}]
 	}`
 	var jsonObject map[string]interface{}
-	err := json.Unmarshal([]byte(json_string), &jsonObject)
+	err := json.Unmarshal([]byte(jsonString), &jsonObject)
 	if err != nil {
 		t.Error(err)
 	}
 	report := BuildCoverageReport(jsonObject)
-	expected_report := &CoverageReport{
+	expectedReport := &CoverageReport{
 		FileReports: []FileReport{{
 			Name:          "test.rb",
 			FileDigest:    "*md5*",
@@ -62,19 +62,19 @@ func TestCoverageReportWithExpectedJson(t *testing.T) {
 			LineCoverages: []LineCoverage{{Hits: 0, Ignore: true}, {Hits: 1, Ignore: false}, {Hits: 0, Ignore: true}},
 		}},
 	}
-	if !reflect.DeepEqual(report, expected_report) {
+	if !reflect.DeepEqual(report, expectedReport) {
 		t.Errorf("")
 	}
 }
 
 func TestCoverageReportWithWrongJson(t *testing.T) {
-	json_string := `{
+	jsonString := `{
 		"something_else": [{
 			"test": "some string"
 		}]
 	}`
 	var jsonObject map[string]interface{}
-	err := json.Unmarshal([]byte(json_string), &jsonObject)
+	err := json.Unmarshal([]byte(jsonString), &jsonObject)
 	if err != nil {
 		t.Error(err)
 	}

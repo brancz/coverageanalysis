@@ -20,9 +20,9 @@ type CoverageReport struct {
 
 func BuildCoverageReport(jsonObject map[string]interface{}) *CoverageReport {
 	report := &CoverageReport{}
-	source_files := jsonObject["source_files"].([]interface{})
-	for i := range source_files {
-		fileReport := BuildFileReport(source_files[i].(map[string]interface{}))
+	sourceFiles := jsonObject["source_files"].([]interface{})
+	for i := range sourceFiles {
+		fileReport := BuildFileReport(sourceFiles[i].(map[string]interface{}))
 		report.FileReports = append(report.FileReports, *fileReport)
 	}
 	return report
