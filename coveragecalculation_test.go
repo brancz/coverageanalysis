@@ -1,4 +1,4 @@
-package main
+package coverageanalysis
 
 import (
 	"github.com/stretchr/testify/assert"

@@ -1,13 +1,9 @@
-package main
+package coverageanalysis
 
 import (
 	"encoding/json"
 	"errors"
 )
-
-func main() {
-
-}
 
 func AnalyzeJson(jsonString string) (report *CoverageReport, err error) {
 	var jsonObject map[string]interface{}

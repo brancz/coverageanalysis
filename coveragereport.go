@@ -1,4 +1,4 @@
-package main
+package coverageanalysis
 
 type LineCoverage struct {
 	Hits   float64
